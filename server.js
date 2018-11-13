@@ -4,9 +4,9 @@ const serveStatic = require('serve-static')
 
 const PORT = process.env.PORT || 5000
 
-app = express()
+const app = express()
 
-app.use(serveStatic(__dirname + '/dist'))
+app.use(serveStatic(path.join(__dirname, '/dist')))
 
 app.listen(PORT)
 
