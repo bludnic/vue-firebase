@@ -15,22 +15,32 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: HomePage
+      component: HomePage,
+      meta: {
+        title: 'Vue Firebase'
+      }
     },
     {
       path: '/signin',
-      component: SigninPage
+      component: SigninPage,
+      meta: {
+        title: 'Sign In'
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterPage
+      component: RegisterPage,
+      meta: {
+        title: 'Register'
+      }
     },
     {
       path: '/profile',
       name: 'profile',
       component: ProfilePage,
       meta: {
+        title: 'Your Profile',
         requiresAuth: true
       }
     },
@@ -39,6 +49,7 @@ const router = new Router({
       name: 'profile-settings',
       component: ProfileSettingsPage,
       meta: {
+        title: 'Profile Settings',
         requiresAuth: true
       }
     }
@@ -46,5 +57,9 @@ const router = new Router({
 })
 
 router.beforeEach(AuthMiddleware)
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || ''
+  next()
+})
 
 export default router
